@@ -13,9 +13,9 @@ import (
 func Day1() {
 	var fileName string
 	if os.Getenv("MODE") == "TEST" {
-		fileName = "inputfiles/Day1Sample.txt"
+		fileName = "../inputfiles/Day1Sample.txt"
 	} else {
-		fileName = "inputfiles/Day1.txt"
+		fileName = "../inputfiles/Day1.txt"
 	}
 	f, _ := os.Open(fileName)
 	defer f.Close()
