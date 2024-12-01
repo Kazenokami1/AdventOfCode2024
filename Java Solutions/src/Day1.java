@@ -21,7 +21,7 @@ public class Day1 {
         ArrayList<Integer> listOne = new ArrayList<Integer>();
         ArrayList<Integer> listTwo = new ArrayList<Integer>();
          try {
-            File lists = new File("inputFiles/Day1.txt");
+            File lists = new File("../inputFiles/Day1.txt");
             Scanner myReader = new Scanner(lists);
             while(myReader.hasNextLine()) {
                 String bothList = myReader.nextLine();
