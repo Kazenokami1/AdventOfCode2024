@@ -25,8 +25,8 @@ func Day1() {
 	var secondList []float64
 	for scanner.Scan() {
 		lists := strings.Split(scanner.Text(), "   ")
-		listOneInt, _ := strconv.ParseFloat(lists[0], 0)
-		listTwoInt, _ := strconv.ParseFloat(lists[1], 0)
+		listOneInt, _ := strconv.ParseFloat(lists[0], 64)
+		listTwoInt, _ := strconv.ParseFloat(lists[1], 64)
 		firstList = append(firstList, listOneInt)
 		secondList = append(secondList, listTwoInt)
 	}
