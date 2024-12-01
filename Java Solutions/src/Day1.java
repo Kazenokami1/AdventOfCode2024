@@ -8,6 +8,7 @@ package com.kaz.aoc.day1;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Scanner;
 import java.math;
 
@@ -42,14 +43,8 @@ public class Day1 {
         }
         Integer similarityScore = 0;
         System.out.printf("Part 1 Answer: %d\n", totalDifference);
-        for (int i=0;i<listOne.size();i++) {
-            Integer numberSimilar = 0;
-            for (Integer value : listTwo) {
-                if (value.equals(listOne.get(i))) {
-                    numberSimilar++;
-                }
-            }
-            similarityScore += listOne.get(i)*numberSimilar;
+        for (Integer i : listOne) {
+            similarityScore += i*Collections.frequency(listTwo, i);
         }
         System.out.printf("Part 2 Answer: %d\n", similarityScore);
     }
