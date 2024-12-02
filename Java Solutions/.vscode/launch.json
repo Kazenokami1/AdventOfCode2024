@@ -6,6 +6,12 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Day2",
+            "request": "launch",
+            "mainClass": "Day2"
+        },
+        {
+            "type": "java",
             "name": "Current File",
             "request": "launch",
             "mainClass": "${file}"
