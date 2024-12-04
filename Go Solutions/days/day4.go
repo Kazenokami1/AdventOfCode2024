@@ -21,14 +21,7 @@ func Day4() {
 	for scanner.Scan() {
 		wordSearch = append(wordSearch, scanner.Text())
 	}
-	xmasCount := part1IsSoUgly(wordSearch)
-	fmt.Printf("Part 1 Answer: %d\n", xmasCount)
-	xmasCount = slidingWindow(wordSearch, 3, true)
-	fmt.Printf("Part 2 Answer: %d\n", xmasCount)
-}
-
-func part1IsSoUgly(wordSearch []string) int {
-	var xmasCount int
+	xmasCount := slidingWindow(wordSearch, 4, false)
 	for _, line := range wordSearch {
 		xmasCount += strings.Count(line, "XMAS")
 		xmasCount += strings.Count(line, "SAMX")
@@ -41,42 +34,12 @@ func part1IsSoUgly(wordSearch []string) int {
 		xmasCount += strings.Count(line, "XMAS")
 		xmasCount += strings.Count(line, "SAMX")
 	}
-	for i := 0; i < len(wordSearch[0]); i++ {
-		var line string
-		for j := 0; j <= i; j++ {
-			line += string(wordSearch[i-j][i-(i-j)])
-		}
-		xmasCount += strings.Count(line, "XMAS")
-		xmasCount += strings.Count(line, "SAMX")
-	}
-	for i := len(wordSearch) - 1; i > 0; i-- {
-		var line string
-		for j := 0; j+i < len(wordSearch[0]); j++ {
-			line += string(wordSearch[i+j][len(wordSearch[0])-1-j])
-		}
-		xmasCount += strings.Count(line, "XMAS")
-		xmasCount += strings.Count(line, "SAMX")
-	}
-	for i := 0; i < len(wordSearch); i++ {
-		var line string
-		for j := 0; j <= i; j++ {
-			line += string(wordSearch[i-j][len(wordSearch[0])-1-j])
-		}
-		xmasCount += strings.Count(line, "XMAS")
-		xmasCount += strings.Count(line, "SAMX")
-	}
-	for i := len(wordSearch) - 1; i > 0; i-- {
-		var line string
-		for j := 0; j+i < len(wordSearch[0]); j++ {
-			line += string(wordSearch[len(wordSearch)-1-j][len(wordSearch)-1-i-j])
-		}
-		xmasCount += strings.Count(line, "XMAS")
-		xmasCount += strings.Count(line, "SAMX")
-	}
-	return xmasCount
+	fmt.Printf("Part 1 Answer: %d\n", xmasCount)
+	xmasCount = slidingWindow(wordSearch, 3, true)
+	fmt.Printf("Part 2 Answer: %d\n", xmasCount)
 }
 
-func slidingWindow(wordSearch []string, windowSize int, findCrossing bool) int {
+func slidingWindow(wordSearch []string, windowSize int, part2 bool) int {
 	var xmasCount int
 	for i := 0; i <= len(wordSearch[0])-windowSize; i++ {
 		for j := 0; j <= len(wordSearch)-windowSize; j++ {
@@ -84,18 +47,31 @@ func slidingWindow(wordSearch []string, windowSize int, findCrossing bool) int {
 			for k := 0; k < windowSize; k++ {
 				window = append(window, wordSearch[j+k][i:windowSize+i])
 			}
-			if findCrossing {
+			if part2 {
 				//check center letter
 				if window[1][1] == 'A' {
 					var line string
 					var lineTwo string
-					for j := 0; j < windowSize; j++ {
-						line += string(window[j][j])
-						lineTwo += string(window[j][windowSize-j-1])
+					for m := 0; m < windowSize; m++ {
+						line += string(window[m][m])
+						lineTwo += string(window[m][windowSize-m-1])
 					}
 					if (line == "MAS" || line == "SAM") && (lineTwo == "MAS" || lineTwo == "SAM") {
 						xmasCount++
 					}
+				}
+			} else {
+				var diagonal string
+				var diagonalTwo string
+				for m := 0; m < windowSize; m++ {
+					diagonal += string(window[m][m])
+					diagonalTwo += string(window[windowSize-m-1][m])
+				}
+				if diagonal == "XMAS" || diagonal == "SAMX" {
+					xmasCount++
+				}
+				if diagonalTwo == "XMAS" || diagonalTwo == "SAMX" {
+					xmasCount++
 				}
 			}
 		}
