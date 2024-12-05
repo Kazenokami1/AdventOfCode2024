@@ -4,6 +4,7 @@ import (
 	"bufio"
 	"fmt"
 	"os"
+	"slices"
 	"strings"
 )
 
@@ -21,7 +22,7 @@ func Day4() {
 	for scanner.Scan() {
 		wordSearch = append(wordSearch, scanner.Text())
 	}
-	xmasCount := slidingWindow(wordSearch, 4, false)
+	xmasCount := countX(wordSearch, 4, []string{"XMAS", "SAMX"}, false)
 	for _, line := range wordSearch {
 		xmasCount += strings.Count(line, "XMAS")
 		xmasCount += strings.Count(line, "SAMX")
@@ -35,11 +36,11 @@ func Day4() {
 		xmasCount += strings.Count(line, "SAMX")
 	}
 	fmt.Printf("Part 1 Answer: %d\n", xmasCount)
-	xmasCount = slidingWindow(wordSearch, 3, true)
+	xmasCount = countX(wordSearch, 3, []string{"MAS", "SAM"}, true)
 	fmt.Printf("Part 2 Answer: %d\n", xmasCount)
 }
 
-func slidingWindow(wordSearch []string, windowSize int, part2 bool) int {
+func countX(wordSearch []string, windowSize int, wordsToFind []string, part2 bool) int {
 	var xmasCount int
 	for i := 0; i <= len(wordSearch[0])-windowSize; i++ {
 		for j := 0; j <= len(wordSearch)-windowSize; j++ {
@@ -47,30 +48,21 @@ func slidingWindow(wordSearch []string, windowSize int, part2 bool) int {
 			for k := 0; k < windowSize; k++ {
 				window = append(window, wordSearch[j+k][i:windowSize+i])
 			}
+			var line string
+			var lineTwo string
+			for m := 0; m < windowSize; m++ {
+				line += string(window[m][m])
+				lineTwo += string(window[m][windowSize-m-1])
+			}
 			if part2 {
-				//check center letter
-				if window[1][1] == 'A' {
-					var line string
-					var lineTwo string
-					for m := 0; m < windowSize; m++ {
-						line += string(window[m][m])
-						lineTwo += string(window[m][windowSize-m-1])
-					}
-					if (line == "MAS" || line == "SAM") && (lineTwo == "MAS" || lineTwo == "SAM") {
-						xmasCount++
-					}
-				}
-			} else {
-				var diagonal string
-				var diagonalTwo string
-				for m := 0; m < windowSize; m++ {
-					diagonal += string(window[m][m])
-					diagonalTwo += string(window[windowSize-m-1][m])
-				}
-				if diagonal == "XMAS" || diagonal == "SAMX" {
+				if slices.Contains(wordsToFind, line) && slices.Contains(wordsToFind, lineTwo) {
 					xmasCount++
 				}
-				if diagonalTwo == "XMAS" || diagonalTwo == "SAMX" {
+			} else {
+				if slices.Contains(wordsToFind, line) {
+					xmasCount++
+				}
+				if slices.Contains(wordsToFind, lineTwo) {
 					xmasCount++
 				}
 			}
