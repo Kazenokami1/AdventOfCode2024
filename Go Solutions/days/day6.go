@@ -45,7 +45,7 @@ func Day6() {
 	fmt.Printf("Part 1 Answer: %d\n", len(visitedPositions))
 	var newObstaclePositions int
 	for visitedPosition := range visitedPositions {
-		guardPosition = [2]int{guardStartingPosition[0], guardStartingPosition[1]}
+		guardPosition = guardStartingPosition
 		guardDirection = guardStartingDirection
 		if visitedPosition != guardStartingPosition {
 			previousTurnDirection := guardDirection
