@@ -13,7 +13,7 @@ func (d Days) Day4()  { days.Day4() }
 func (d Days) Day5()  { days.Day5() }
 func (d Days) Day6()  { days.Day6() }
 func (d Days) Day7()  { days.Day7() }
-func (d Days) Day8()  {}
+func (d Days) Day8()  { days.Day8() }
 func (d Days) Day9()  {}
 func (d Days) Day10() {}
 func (d Days) Day11() {}
