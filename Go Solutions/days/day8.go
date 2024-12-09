@@ -6,10 +6,6 @@ import (
 	"os"
 )
 
-/*
-I like this solution but it does take a bit (~10 seconds) to run due to the number of loops it takes to convert to different bases
-and pad enough 0s to the base x representation of the int
-*/
 func Day8() {
 	var fileName string
 	if os.Getenv("MODE") == "TEST" {
