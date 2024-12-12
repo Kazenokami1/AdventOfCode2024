@@ -12,8 +12,10 @@ import (
  * I realize this code isn't the cleanest lol, but it works and works quickly :)
  * Part 1 is pretty much brute force and because I like having part 1 and part 2 in the same file I didn't want to change it
  * Part 2 does the solving of the stones instead of brute force
- * For some reason Part 2 is dependent on Part 1 - I'm assuming because of when I'm dropping the stone from the array.
- * I'll fix it when I get caught back up lol
+ * -- Known Errors:
+ * --- Ideally the solving for Part 2 should solve Part 1 if you change 75 to 25.
+ * --- The sample data works as expected returning the correct value for Part 1 and the same value for Part 2 with or without Part 1
+ * --- The Real Data without Part 1 returns the wrong answer for both Part 1 and Part 2
  */
 
 func Day11() {
