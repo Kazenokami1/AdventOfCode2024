@@ -65,12 +65,7 @@ func Day11() {
 				stoneUnsolved = true
 			} else {
 				totalStones += val
-				if len(stones) > 0 {
-					stoneToIncrement = stones[len(stones)-1]
-					stones = stones[0 : len(stones)-1]
-				} else {
-					stoneToIncrement = emptyStone
-				}
+				stoneToIncrement = emptyStone
 			}
 		}
 		if stoneToIncrement != emptyStone {
