@@ -40,3 +40,20 @@ func (c *clawMachine) calcButtonPresses() {
 		c.tokensForPrize = int(3*c.aButtonPresses + c.bButtonPresses)
 	}
 }
+
+type robot struct {
+	position [2]int
+	velocity [2]int
+}
+
+func (r *robot) calcPosition(seconds int, mapWidth int, mapHeight int) {
+	robotX := (r.position[0] + seconds*r.velocity[0]) % mapWidth
+	robotY := (r.position[1] + seconds*r.velocity[1]) % mapHeight
+	if robotX < 0 {
+		robotX += mapWidth
+	}
+	if robotY < 0 {
+		robotY += mapHeight
+	}
+	r.position = [2]int{robotX, robotY}
+}
