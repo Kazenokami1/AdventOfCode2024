@@ -42,8 +42,10 @@ func (c *clawMachine) calcButtonPresses() {
 }
 
 type robot struct {
-	position [2]int
-	velocity [2]int
+	position       [2]int
+	velocity       [2]int
+	facing         int
+	moveDirections [][2]int
 }
 
 func (r *robot) calcPosition(seconds int, mapWidth int, mapHeight int) {
@@ -56,4 +58,9 @@ func (r *robot) calcPosition(seconds int, mapWidth int, mapHeight int) {
 		robotY += mapHeight
 	}
 	r.position = [2]int{robotX, robotY}
+}
+
+func (r *robot) moveRobot() {
+	r.position[0] += r.moveDirections[r.facing%4][0]
+	r.position[1] += r.moveDirections[r.facing%4][1]
 }
