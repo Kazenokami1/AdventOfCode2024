@@ -8,6 +8,13 @@ import (
 	"strings"
 )
 
+/*
+	As a note, Part 2 of this will return the wrong cost if a group fully contained a group of plots that also fully contained another group of plots.
+	A fix for this would be to move the currently recursive function to a separate function that basically didn't check for an internal group.
+	In other words, copy the labyrinthRobotFunction, and cut lines 121-133 from that second function.
+	The first call (76) would still call labyrinthRobotFunction, the 2nd call (127) would call the new function instead.
+*/
+
 func Day12() {
 	var fileName string
 	if os.Getenv("MODE") == "TEST" {
