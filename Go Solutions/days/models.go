@@ -64,3 +64,16 @@ func (r *robot) moveRobot() {
 	r.position[0] += r.moveDirections[r.facing%4][0]
 	r.position[1] += r.moveDirections[r.facing%4][1]
 }
+
+type reindeer struct {
+	position    [2]int
+	facing      string
+	currentPath [][2]int
+}
+
+type mazeSquare struct {
+	position   [2]int
+	score      float64
+	exits      []*mazeSquare
+	squareType string
+}
