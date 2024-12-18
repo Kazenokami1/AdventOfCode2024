@@ -84,16 +84,3 @@ func Day7() {
 	}
 	fmt.Printf("Part 2 Answer: %d\n", totalSumCalibrations)
 }
-
-func convertToBase(numberToConvert int, base int) string {
-	var convertedNumber string
-	if numberToConvert == 0 {
-		return "0"
-	}
-	for numberToConvert > 0 {
-		remainder := numberToConvert % base
-		numberToConvert /= base
-		convertedNumber = strconv.Itoa(remainder) + convertedNumber
-	}
-	return convertedNumber
-}
